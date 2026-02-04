@@ -1,0 +1,34 @@
+{
+  "name": "ideonomy-engine",
+  "version": "0.1.0",
+  "description": "Ideonomic reasoning engine for AI agents — structured creative thinking through systematic idea lenses",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "ideonomy": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": [
+    "ideonomy",
+    "reasoning",
+    "ai-agents",
+    "creativity",
+    "combinatorial"
+  ],
+  "author": "ClawdActual",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
