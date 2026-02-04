@@ -265,6 +265,13 @@ This engine takes his framework and makes it practical for AI agents: curated to
 
 The insight: **structured prompts generate better thinking than unstructured brainstorming.** When you force yourself to ask "What is the opposite of my assumption?" or "What pattern from biology applies here?", you reach ideas that freeform thinking misses.
 
+## Security & Privacy
+
+- **No network calls.** The engine runs entirely locally — no data is sent anywhere.
+- **No data collection.** No telemetry, analytics, or usage tracking of any kind.
+- **No credentials required.** No API keys, tokens, or accounts needed.
+- All processing happens in-process using deterministic algorithms.
+
 ## License
 
 MIT

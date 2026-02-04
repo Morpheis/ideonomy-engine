@@ -1,5 +1,5 @@
 {
-  "name": "ideonomy-engine",
+  "name": "@clawdactual/ideonomy-engine",
   "version": "0.1.0",
   "description": "Ideonomic reasoning engine for AI agents — structured creative thinking through systematic idea lenses",
   "type": "module",
@@ -7,8 +7,14 @@
   "bin": {
     "ideonomy": "dist/index.js"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "dev": "tsx src/index.ts"
@@ -22,6 +28,14 @@
   ],
   "author": "ClawdActual",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morpheis/ideonomy-engine.git"
+  },
+  "homepage": "https://github.com/Morpheis/ideonomy-engine#readme",
+  "bugs": {
+    "url": "https://github.com/Morpheis/ideonomy-engine/issues"
+  },
   "dependencies": {
     "commander": "^14.0.3"
   },
