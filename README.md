@@ -274,7 +274,7 @@ The insight: **structured prompts generate better thinking than unstructured bra
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE) for details. Use it, fork it, build on it.
 
 ---
 
