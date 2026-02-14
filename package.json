@@ -3,7 +3,15 @@
   "version": "0.1.0",
   "description": "Ideonomic reasoning engine for AI agents — structured creative thinking through systematic idea lenses",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/lib.js",
+  "types": "dist/lib.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/lib.js",
+      "types": "./dist/lib.d.ts"
+    },
+    "./cli": "./dist/index.js"
+  },
   "bin": {
     "ideonomy": "dist/index.js"
   },
