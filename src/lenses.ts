@@ -1,5 +1,6 @@
 import type { Division, LensResult } from './types.js';
 import { organonLists } from './data/organons.js';
+import { pickRelevantItems } from './relevance.js';
 
 /**
  * Simple deterministic hash for seeding organon selection.
@@ -35,18 +36,18 @@ export function generateLens(division: Division, problem: string): LensResult {
   // Guiding questions: as-is from the division
   const guidingQuestions = division.guidingQuestions;
 
-  // Relevant organon items: 4 items from each list, seeded
+  // Relevant organon items: 4 items from each list, scored by relevance
   const relevantOrganonItems = organonLists.map(list => ({
     list: list.name,
-    items: pickItems(list.items, seed + simpleHash(list.id), 4),
+    items: pickRelevantItems(list.items, problem, 4),
   }));
 
-  // Cross-domain prompts: 2-3 prompts from sciences and phenomena
+  // Cross-domain prompts: 2-3 prompts from sciences and phenomena, scored by relevance
   const sciencesList = organonLists.find(l => l.id === 'sciences')!;
   const phenomenaList = organonLists.find(l => l.id === 'phenomena')!;
 
-  const scienceItems = pickItems(sciencesList.items, seed, 3);
-  const phenomenaItems = pickItems(phenomenaList.items, seed + 7, 3);
+  const scienceItems = pickRelevantItems(sciencesList.items, problem, 3);
+  const phenomenaItems = pickRelevantItems(phenomenaList.items, problem, 3);
 
   const crossDomainPrompts: string[] = [];
   // 2 science-based prompts + 1 phenomena-based
