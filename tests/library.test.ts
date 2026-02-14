@@ -26,6 +26,14 @@ describe('Library exports', () => {
     // Lens generator
     expect(typeof mod.generateLens).toBe('function');
     expect(typeof mod.generateAllLenses).toBe('function');
+    // v0.2 features
+    expect(typeof mod.drill).toBe('function');
+    expect(typeof mod.chain).toBe('function');
+    expect(typeof mod.synthesize).toBe('function');
+    expect(typeof mod.SessionStore).toBe('function');
+    expect(typeof mod.createSession).toBe('function');
+    expect(typeof mod.scoreRelevance).toBe('function');
+    expect(typeof mod.pickRelevantItems).toBe('function');
   });
 
   it('reason() is callable without CLI', async () => {

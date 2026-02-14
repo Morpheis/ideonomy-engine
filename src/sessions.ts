@@ -32,8 +32,8 @@ export interface Session {
   history: SessionEntry[];
 }
 
-/** Default session storage directory */
-const DEFAULT_DIR = join(
+/** Default session storage directory (configurable via IDEONOMY_SESSIONS_DIR env) */
+const DEFAULT_DIR = process.env.IDEONOMY_SESSIONS_DIR || join(
   process.env.HOME || process.env.USERPROFILE || '.',
   '.ideonomy',
   'sessions'

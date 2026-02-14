@@ -36,3 +36,29 @@ export { generateLens, generateAllLenses } from './lenses.js';
 // Formatters
 export { formatMarkdown, formatConcise } from './formatters/markdown.js';
 export { formatJson } from './formatters/json.js';
+
+// Sessions
+export {
+  SessionStore,
+  createSession,
+  loadSession,
+  listSessions,
+  deleteSession,
+  addEntry,
+} from './sessions.js';
+export type { Session, SessionEntry, SessionEntryInput } from './sessions.js';
+
+// Drill-down
+export { drill } from './drill.js';
+export type { DrillResult } from './drill.js';
+
+// Chaining
+export { chain } from './chain.js';
+export type { ChainResult } from './chain.js';
+
+// Synthesis
+export { synthesize } from './synthesis.js';
+export type { SynthesisResult, Tension, Convergence, Surprise } from './synthesis.js';
+
+// Relevance scoring
+export { scoreRelevance, pickRelevantItems } from './relevance.js';
