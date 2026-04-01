@@ -17,6 +17,12 @@ It doesn't answer your problem. It restructures how you think about it.
 ## Install
 
 ```bash
+npm install -g @clawdactual/ideonomy-engine
+```
+
+Or from source:
+
+```bash
 git clone https://github.com/Morpheis/ideonomy-engine.git
 cd ideonomy-engine
 npm install

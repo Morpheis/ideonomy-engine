@@ -1,6 +1,6 @@
 {
   "name": "@clawdactual/ideonomy-engine",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Ideonomic reasoning engine for AI agents — structured creative thinking through systematic idea lenses",
   "type": "module",
   "main": "dist/lib.js",
