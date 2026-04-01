@@ -395,7 +395,11 @@ program
     if (opts.path) {
       console.log(skillPath);
     } else {
-      console.log(readFileSync(skillPath, 'utf-8'));
+      let content = readFileSync(skillPath, 'utf-8');
+      // Inject current package version into frontmatter
+      const pkgVersion = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '..', 'package.json'), 'utf-8')).version;
+      content = content.replace(/^(---\n[\s\S]*?)version:\s*["']?[\d.]+["']?/m, `$1version: "${pkgVersion}"`);
+      console.log(content);
     }
   });
 
