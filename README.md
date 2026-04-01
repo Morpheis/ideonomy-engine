@@ -37,20 +37,22 @@ Requires Node.js ≥ 22.
 
 ```bash
 # Basic reasoning (auto-selects profile based on problem keywords)
-npx tsx src/index.ts reason "Your problem statement here"
+ideonomy reason "Your problem statement here"
 
 # Concise mode (core questions only)
-npx tsx src/index.ts reason --concise "Your problem statement here"
+ideonomy reason --concise "Your problem statement here"
 
 # Specific profile and lens count
-npx tsx src/index.ts reason --profile creative --lenses 4 "How can I make this more engaging?"
+ideonomy reason --profile creative --lenses 4 "How can I make this more engaging?"
 
 # With synthesis (tensions, convergences, surprises)
-npx tsx src/index.ts reason --synthesize "How can AI agents collaborate?"
+ideonomy reason --synthesize "How can AI agents collaborate?"
 
 # JSON output
-npx tsx src/index.ts reason --json "Your problem statement here"
+ideonomy reason --json "Your problem statement here"
 ```
+
+If running from source instead of the global install, prefix commands with `npx tsx src/index.ts` instead of `ideonomy`.
 
 ### Library (Programmatic)
 
@@ -207,7 +209,8 @@ src/
 npm test              # Run all tests (vitest)
 npm run test:watch    # Watch mode
 npm run build         # Compile TypeScript
-npm run dev           # Run CLI in dev mode (tsx)
+npm run dev           # Run CLI in dev mode (npx tsx)
+ideonomy skill        # Display the agent SKILL.md
 ```
 
 ## License
