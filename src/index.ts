@@ -19,7 +19,7 @@ const program = new Command();
 program
   .name('ideonomy')
   .description('Ideonomic reasoning engine — structured creative thinking through systematic idea lenses')
-  .version('0.2.0');
+  .version(JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '..', 'package.json'), 'utf-8')).version);
 
 // === REASON ===
 
