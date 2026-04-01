@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump type"
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      changelog:
+        description: "Changelog entry for ClawHub"
+        required: false
+        type: string
+        default: "Bug fixes and improvements"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npm test
+        timeout-minutes: 10
+
+      - name: Verify skill command works
+        run: node dist/index.js skill --path
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version
+        id: version
+        run: |
+          NEW_VERSION=$(npm version ${{ inputs.bump }} -m "chore: release v%s")
+          echo "version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "raw_version=${NEW_VERSION#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Push version commit and tag
+        run: git push --follow-tags
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install ClawHub CLI
+        run: npm install -g clawhub
+
+      - name: Publish to ClawHub
+        run: |
+          clawhub auth login --token "$CLAWHUB_TOKEN" --no-browser
+          clawhub publish skill \
+            --slug ideonomy \
+            --name "Ideonomy Engine — Creative Reasoning for AI Agents" \
+            --version "${{ steps.version.outputs.raw_version }}" \
+            --changelog "${{ inputs.changelog }}"
+        env:
+          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        run: |
+          gh release create "${{ steps.version.outputs.version }}" \
+            --title "${{ steps.version.outputs.version }}" \
+            --notes "${{ inputs.changelog }}" \
+            --latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
