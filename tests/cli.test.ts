@@ -4,11 +4,13 @@ import { mkdtempSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 
+const PROJECT_ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const run = (args: string, env?: Record<string, string>) =>
   execSync(`npx tsx src/index.ts ${args}`, {
-    cwd: '/Users/kzink/Personal/ideonomy-engine',
+    cwd: PROJECT_ROOT,
     encoding: 'utf-8',
     env: { ...process.env, ...env },
+    shell: '/bin/bash',
   });
 
 describe('CLI — Core', () => {
