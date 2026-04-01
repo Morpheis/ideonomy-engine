@@ -10,6 +10,9 @@ import { SessionStore } from './sessions.js';
 import { drill } from './drill.js';
 import { chain } from './chain.js';
 import { synthesize } from './synthesis.js';
+import { resolve, join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { existsSync, readFileSync } from 'fs';
 
 const program = new Command();
 
@@ -373,6 +376,26 @@ program
     console.log('**Guiding Questions:**');
     for (let i = 0; i < d.guidingQuestions.length; i++) {
       console.log(`${i + 1}. ${d.guidingQuestions[i]}`);
+    }
+  });
+
+program
+  .command('skill')
+  .description('Display the SKILL.md — teaches agents how to use ideonomy')
+  .option('--path', 'Print the file path instead of the content')
+  .action((opts) => {
+    const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+    const skillPath = join(packageRoot, 'skill', 'SKILL.md');
+
+    if (!existsSync(skillPath)) {
+      console.error(`SKILL.md not found at ${skillPath}`);
+      process.exit(1);
+    }
+
+    if (opts.path) {
+      console.log(skillPath);
+    } else {
+      console.log(readFileSync(skillPath, 'utf-8'));
     }
   });
 
